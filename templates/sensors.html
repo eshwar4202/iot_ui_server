@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?display=swap&family=Noto+Sans:wght@400;500;700;900&family=Space+Grotesk:wght@400;500;700">
+    <title>TrafficGuard - IoT Components</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body class="bg-[#0d1117] text-white font-sans antialiased">
+    <div class="relative flex flex-col min-h-screen">
+        <!-- Header -->
+        <header class="bg-[#0d1117] px-8 py-5 border-b border-[#21262d] flex justify-between items-center shadow-lg">
+            <div class="flex items-center space-x-4">
+                <svg class="w-8 h-8 text-[#58a6ff]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/>
+                </svg>
+                <h1 class="text-2xl font-bold text-[#f0f6fc] tracking-tight">TrafficGuard</h1>
+            </div>
+            <nav class="flex gap-5">
+                <a href="/" class="px-5 py-2.5 rounded-md font-medium text-[#c9d1d9] hover:bg-[#161b22] hover:text-[#58a6ff] transition-all duration-300">Dashboard</a>
+                <a href="/sensors" class="px-5 py-2.5 rounded-md font-medium text-[#58a6ff] bg-[#161b22]">Components</a>
+                <a href="/data_vis" class="px-5 py-2.5 rounded-md font-medium text-[#c9d1d9] hover:bg-[#161b22] hover:text-[#58a6ff] transition-all duration-300">Analytics</a>
+          <a href="/predictions" class="px-5 py-2.5 rounded-md font-medium text-[#c9d1d9] hover:bg-[#161b22] hover:text-[#58a6ff] transition-all duration-300">Predictions</a>
+            </nav>
+        </header>
+
+        <!-- Main Content -->
+        <main class="px-10 py-8 flex-grow">
+            <div class="max-w-7xl mx-auto">
+                <h2 class="text-4xl font-bold text-[#e6edf3] mb-8">IoT System Components</h2>
+                
+                <!-- Hardware Components Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+                    <!-- IR Sensors -->
+                    <div class="component-card">
+                        <div class="component-icon bg-[#ef4444]/20">
+                            <svg class="w-8 h-8 text-[#ef4444]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
+                            </svg>
+                        </div>
+                        <h3 class="component-title">IR Sensors (x2)</h3>
+                        <p class="component-type">Sensor</p>
+                        <p class="component-desc">HC-SR501 PIR motion sensors for vehicle detection with 3-5m range</p>
+                    </div>
+
+                    <!-- ESP32-CAM -->
+                    <div class="component-card">
+                        <div class="component-icon bg-[#3b82f6]/20">
+                            <svg class="w-8 h-8 text-[#3b82f6]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h4M4 8h4m12 0h4M4 4h16"/>
+                            </svg>
+                        </div>
+                        <h3 class="component-title">ESP32-CAM</h3>
+                        <p class="component-type">Controller + Camera</p>
+                        <p class="component-desc">OV2640 camera module with WiFi/Bluetooth connectivity</p>
+                    </div>
+
+                    <!-- Raspberry Pi -->
+                    <div class="component-card">
+                        <div class="component-icon bg-[#10b981]/20">
+                            <svg class="w-8 h-8 text-[#10b981]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9h14M5 15h14M4 4h16a1 1 0 011 1v14a1 1 0 01-1 1H4a1 1 0 01-1-1V5a1 1 0 011-1z"/>
+                            </svg>
+                        </div>
+                        <h3 class="component-title">Raspberry Pi 4</h3>
+                        <p class="component-type">Edge Computer</p>
+                        <p class="component-desc">Quad-core 1.5GHz, 4GB RAM running TensorFlow Lite</p>
+                    </div>
+
+                    <!-- Servo Motor -->
+                    <div class="component-card">
+                        <div class="component-icon bg-[#f59e0b]/20">
+                            <svg class="w-8 h-8 text-[#f59e0b]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+                            </svg>
+                        </div>
+                        <h3 class="component-title">Servo Motor</h3>
+                        <p class="component-type">Actuator</p>
+                        <p class="component-desc">SG90 9g Micro Servo with 180° rotation capability</p>
+                    </div>
+
+                    <!-- LEDs -->
+                    <div class="component-card">
+                        <div class="component-icon bg-[#eab308]/20">
+                            <svg class="w-8 h-8 text-[#eab308]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                        </div>
+                        <h3 class="component-title">LED Indicators (x2)</h3>
+                        <p class="component-type">Actuator</p>
+                        <p class="component-desc">5mm Red/Green LEDs for system status indication</p>
+                    </div>
+
+                    <!-- ESP32 -->
+                    <div class="component-card">
+                        <div class="component-icon bg-[#8b5cf6]/20">
+                            <svg class="w-8 h-8 text-[#8b5cf6]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                            </svg>
+                        </div>
+                        <h3 class="component-title">ESP32 Main Controller</h3>
+                        <p class="component-type">Microcontroller</p>
+                        <p class="component-desc">Dual-core 240MHz, WiFi/Bluetooth 4.2</p>
+                    </div>
+                </div>
+
+                <!-- IoT Architecture Levels -->
+                <div class="bg-[#161b22] p-8 rounded-xl border border-[#21262d]">
+                    <h3 class="text-2xl font-bold text-[#e6edf3] mb-6">IoT Architecture Levels</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="space-y-4">
+                            <div class="iot-level">
+                                <div class="iot-level-number">1</div>
+                                <div>
+                                    <h4 class="iot-level-title">Perception Layer</h4>
+                                    <p class="iot-level-desc">IR Sensors, ESP32-CAM (Data Acquisition)</p>
+                                </div>
+                            </div>
+                            <div class="iot-level">
+                                <div class="iot-level-number">2</div>
+                                <div>
+                                    <h4 class="iot-level-title">Network Layer</h4>
+                                    <p class="iot-level-desc">WiFi (ESP32), Ethernet (RPi4) - Data Transmission</p>
+                                </div>
+                            </div>
+                            <div class="iot-level">
+                                <div class="iot-level-number">3</div>
+                                <div>
+                                    <h4 class="iot-level-title">Middleware Layer</h4>
+                                    <p class="iot-level-desc">Mosquitto MQTT Broker, Node-RED - Data Processing</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="iot-level">
+                                <div class="iot-level-number">4</div>
+                                <div>
+                                    <h4 class="iot-level-title">Application Layer</h4>
+                                    <p class="iot-level-desc">Traffic Management System, User Dashboard</p>
+                                </div>
+                            </div>
+                            <div class="iot-level">
+                                <div class="iot-level-number">5</div>
+                                <div>
+                                    <h4 class="iot-level-title">Business Layer</h4>
+                                    <p class="iot-level-desc">Data Analytics, Decision Support Systems</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

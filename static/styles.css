@@ -1,0 +1,267 @@
+/* Enhanced Professional Styling */
+.card {
+    background: linear-gradient(145deg, #161b22 0%, #0d1117 100%);
+    border: 1px solid #21262d;
+    border-radius: 12px;
+    padding: 1.5rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.btn {
+    background: linear-gradient(145deg, #21262d 0%, #161b22 100%);
+    color: #c9d1d9;
+    padding: 0.625rem 1.25rem;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid #30363d;
+}
+
+.btn:hover {
+    background: linear-gradient(145deg, #30363d 0%, #21262d 100%);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+    animation: fadeIn 0.5s ease-out forwards;
+}
+
+input, select {
+    background-color: #0d1117 !important;
+    border: 1px solid #21262d !important;
+    color: #f0f6fc !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 8px !important;
+    padding: 0.75rem 1rem !important;
+}
+
+input:focus, select:focus {
+    outline: none !important;
+    box-shadow: 0 0 0 2px rgba(88, 166, 255, 0.5) !important;
+    border-color: #58a6ff !important;
+}
+
+.chart-container {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.gradient-text {
+    background: linear-gradient(45deg, #58a6ff, #1a73e8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Traffic Light Styles */
+.traffic-light {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 8px;
+    background: #161b22;
+    border-radius: 12px;
+    border: 1px solid #30363d;
+}
+
+.traffic-light-bulb {
+    transition: all 0.3s ease;
+    filter: brightness(0.7);
+}
+
+.traffic-light-bulb.active {
+    filter: brightness(1);
+    box-shadow: 0 0 12px currentColor;
+}
+
+/* Heatmap Image Styling */
+.heatmap-container {
+    position: relative;
+    background: #0d1117;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid #30363d;
+}
+
+.heatmap-container img {
+    mix-blend-mode: screen;
+    transition: transform 0.3s ease;
+}
+
+.heatmap-container:hover img {
+    transform: scale(1.02);
+}
+
+
+/* Traffic Lights */
+.traffic-light {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0.75rem;
+    background: #161b22;
+    border-radius: 1rem;
+    border: 1px solid #30363d;
+}
+
+.light {
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+    opacity: 0.2;
+    transition: all 0.3s ease;
+}
+
+.light.active {
+    opacity: 1;
+    box-shadow: 0 0 12px currentColor;
+}
+
+.red { background: #ef4444; }
+.yellow { background: #eab308; }
+.green { background: #22c55e; }
+
+/* Heatmap styling */
+
+
+/* Components Page Styles */
+.component-card {
+    @apply bg-[#161b22] p-6 rounded-xl border border-[#21262d] hover:border-[#30363d] transition-all duration-300;
+}
+
+.component-icon {
+    @apply w-12 h-12 rounded-lg flex items-center justify-center mb-4;
+}
+
+.component-title {
+    @apply text-lg font-semibold text-[#e6edf3] mb-1;
+}
+
+.component-type {
+    @apply text-sm text-[#58a6ff] mb-2;
+}
+
+.component-desc {
+    @apply text-sm text-[#8b949e];
+}
+
+.iot-level {
+    @apply flex items-start space-x-4 p-4 bg-[#0d1117] rounded-lg border border-[#21262d];
+}
+
+.iot-level-number {
+    @apply w-8 h-8 flex items-center justify-center rounded-full bg-[#58a6ff] text-white font-bold;
+}
+
+.iot-level-title {
+    @apply text-[#e6edf3] font-medium mb-1;
+}
+
+.iot-level-desc {
+    @apply text-sm text-[#8b949e];
+}
+
+/* Model Analytics Styles */
+.metric-card {
+    @apply flex justify-between items-center p-4 bg-[#0d1117] rounded-lg border border-[#21262d];
+}
+
+.metric-label {
+    @apply text-[#8b949e];
+}
+
+.metric-value {
+    @apply text-lg font-semibold text-[#58a6ff];
+}
+
+.feature-importance {
+    @apply flex items-center space-x-4 p-3 bg-[#0d1117] rounded-lg border border-[#21262d];
+}
+
+.feature-name {
+    @apply text-sm text-[#8b949e] w-32;
+}
+
+.feature-bar {
+    @apply h-4 bg-gradient-to-r from-[#58a6ff] to-[#1a73e8] rounded-full transition-all duration-500;
+}
+
+/* Base Styles */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+    animation: fadeIn 0.5s ease-out forwards;
+}
+
+/* Component Cards */
+.component-card {
+    @apply bg-[#161b22] p-6 rounded-xl border border-[#21262d] hover:border-[#30363d] transition-all duration-300;
+}
+
+/* Traffic Lights */
+.traffic-light {
+    @apply flex flex-col gap-2 p-2 bg-[#161b22] rounded-xl border border-[#30363d];
+}
+
+.light {
+    @apply w-6 h-6 rounded-full opacity-20 transition-all duration-300;
+}
+
+.light.active {
+    @apply opacity-100 shadow-[0_0_12px];
+}
+
+/* Model Analytics */
+.metric-card {
+    @apply flex justify-between items-center p-4 bg-[#0d1117] rounded-lg border border-[#21262d];
+}
+
+/* Health Status Items */
+.health-item {
+    @apply flex items-center space-x-3 p-3 bg-[#0d1117] rounded-lg border border-[#21262d];
+}
+
+.health-icon {
+    @apply w-10 h-10 rounded-lg flex items-center justify-center;
+}
+
+.health-label {
+    @apply text-sm text-[#8b949e];
+}
+
+.health-status {
+    @apply text-sm font-medium text-[#58a6ff];
+}
+
+/* Action Buttons */
+.action-btn {
+    @apply flex flex-col items-center justify-center space-y-2 p-4 rounded-lg transition-all duration-300;
+}
+
+/* Blockchain Verification */
+.blockchain-status {
+    @apply text-sm font-mono text-[#8b949e];
+}
+
+/* Mini Chart Container */
+.mini-chart {
+    @apply h-32 bg-[#161b22] rounded-xl border border-[#21262d] p-2;
+}

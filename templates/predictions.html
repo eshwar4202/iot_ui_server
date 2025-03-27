@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?display=swap&family=Noto+Sans:wght@400;500;700;900&family=Space+Grotesk:wght@400;500;700">
+    <title>TrafficGuard - Predictions</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body class="bg-[#0d1117] text-white font-sans antialiased">
+    <div class="relative flex flex-col min-h-screen">
+        <!-- Header -->
+        <header class="bg-[#0d1117] px-8 py-5 border-b border-[#21262d] flex justify-between items-center shadow-lg">
+            <div class="flex items-center space-x-4">
+                <svg class="w-8 h-8 text-[#58a6ff]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/>
+                </svg>
+                <h1 class="text-2xl font-bold text-[#f0f6fc] tracking-tight">TrafficGuard</h1>
+            </div>
+            <nav class="flex gap-5">
+                <a href="/" class="px-5 py-2.5 rounded-md font-medium text-[#c9d1d9] hover:bg-[#161b22] hover:text-[#58a6ff] transition-all duration-300">Dashboard</a>
+                <a href="/predictions" class="px-5 py-2.5 rounded-md font-medium text-[#58a6ff] bg-[#161b22]">Predictions</a>
+                <a href="/sensors" class="px-5 py-2.5 rounded-md font-medium text-[#c9d1d9] hover:bg-[#161b22] hover:text-[#58a6ff] transition-all duration-300">Components</a>
+                <a href="/data_vis" class="px-5 py-2.5 rounded-md font-medium text-[#c9d1d9] hover:bg-[#161b22] hover:text-[#58a6ff] transition-all duration-300">Analytics</a>
+            </nav>
+        </header>
+
+        <!-- Main Content -->
+        <main class="px-10 py-8 flex-grow">
+            <div class="max-w-7xl mx-auto">
+                <h2 class="text-4xl font-bold text-[#e6edf3] mb-8">Predictions</h2>
+                
+                <!-- Demand Forecasting -->
+                <section class="mb-8">
+                    <div class="bg-gradient-to-br from-[#161b22] to-[#0d1117] p-6 rounded-xl border border-[#21262d] shadow-xl">
+                        <h3 class="text-2xl font-semibold mb-6 text-[#f0f6fc] flex items-center space-x-2">
+                            <svg class="w-6 h-6 text-[#0bda5b]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                            </svg>
+                            <span>Demand Forecasting</span>
+                        </h3>
+                        <div class="space-y-6">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label class="block text-sm font-medium text-[#8b949e] mb-2">Select Lane</label>
+                                    <select id="laneSelect" class="w-full bg-[#0d1117] border border-[#21262d] rounded-lg px-4 py-2.5 text-[#f0f6fc] focus:ring-2 focus:ring-[#58a6ff] focus:border-transparent">
+                                        <option value="lane_1">Lane 1</option>
+                                        <option value="lane_2">Lane 2</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-[#8b949e] mb-2">Select Date & Time</label>
+                                    <input type="datetime-local" id="datetimeInput" class="w-full bg-[#0d1117] border border-[#21262d] rounded-lg px-4 py-2.5 text-[#f0f6fc] focus:ring-2 focus:ring-[#58a6ff] focus:border-transparent">
+                                </div>
+                            </div>
+                            <button onclick="predictVehicleCount()" class="w-full bg-[#238636] hover:bg-[#2ea043] text-white font-medium py-3 rounded-lg transition-all duration-300 flex items-center justify-center space-x-2">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                                </svg>
+                                <span>Generate Forecast</span>
+                            </button>
+                            <div class="mt-6 p-6 bg-[#0d1117] rounded-lg border border-[#21262d]">
+                                <p class="text-sm text-[#8b949e] mb-2">Predicted Vehicle Count</p>
+                                <p id="predictedCount" class="text-3xl font-bold text-[#58a6ff]">-</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Threat Prediction -->
+                <section>
+                    <div class="bg-gradient-to-br from-[#161b22] to-[#0d1117] p-6 rounded-xl border border-[#21262d] shadow-xl">
+                        <h3 class="text-2xl font-semibold mb-6 text-[#f0f6fc] flex items-center space-x-2">
+                            <svg class="w-6 h-6 text-[#ff6b6b]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                            <span>Threat Prediction</span>
+                        </h3>
+                        <div class="space-y-6">
+                            <div>
+                                <label class="block text-sm font-medium text-[#8b949e] mb-2">Select Date & Time</label>
+                                <input type="datetime-local" id="attackDatetimeInput" class="w-full bg-[#0d1117] border border-[#21262d] rounded-lg px-4 py-2.5 text-[#f0f6fc] focus:ring-2 focus:ring-[#58a6ff] focus:border-transparent">
+                            </div>
+                            <button onclick="predictAttack()" class="w-full bg-[#da0b3b] hover:bg-[#ff123d] text-white font-medium py-3 rounded-lg transition-all duration-300 flex items-center justify-center space-x-2">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                                </svg>
+                                <span>Assess Security Risk</span>
+                            </button>
+                            <div class="mt-6 p-6 bg-[#0d1117] rounded-lg border border-[#21262d]">
+                                <p class="text-sm text-[#8b949e] mb-2">Predicted Attack Likelihood</p>
+                                <p id="predictedAttack" class="text-3xl font-bold text-[#58a6ff]">-</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+    <script src="/static/script.js"></script>
+</body>
+</html>

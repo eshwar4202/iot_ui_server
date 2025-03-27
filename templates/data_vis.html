@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?display=swap&family=Noto+Sans:wght@400;500;700;900&family=Space+Grotesk:wght@400;500;700">
+    <title>TrafficGuard - Analytics</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body class="bg-[#0d1117] text-white font-sans antialiased">
+    <div class="relative flex flex-col min-h-screen">
+        <header class="bg-[#0d1117] px-8 py-5 border-b border-[#21262d] flex justify-between items-center shadow-lg">
+            <div class="flex items-center space-x-4">
+                <svg class="w-8 h-8 text-[#58a6ff]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/>
+                </svg>
+                <h1 class="text-2xl font-bold text-[#f0f6fc] tracking-tight">TrafficGuard</h1>
+            </div>
+            <nav class="flex gap-5">
+                <a href="/" class="px-5 py-2.5 rounded-md font-medium text-[#c9d1d9] hover:bg-[#161b22] hover:text-[#58a6ff] transition-all duration-300 flex items-center space-x-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+                    </svg>
+                    <span>Dashboard</span>
+                </a>
+                <a href="/data_vis" class="px-5 py-2.5 rounded-md font-medium text-[#c9d1d9] hover:bg-[#161b22] hover:text-[#58a6ff] transition-all duration-300 flex items-center space-x-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                    </svg>
+                    <span>Analytics</span>
+                </a>
+            </nav>
+        </header>
+
+        <div id="realtime-vis" class="px-10 py-8 flex-grow">
+            <div class="max-w-7xl mx-auto">
+                <h2 class="text-4xl font-bold text-[#e6edf3] mb-2">Traffic Analytics</h2>
+                <p class="text-[#8b949e] mb-6">Visual representation of live traffic patterns and security events</p>
+                
+                <div class="bg-gradient-to-br from-[#161b22] to-[#0d1117] p-6 rounded-xl border border-[#21262d] shadow-xl mb-8">
+                    <div class="flex items-center justify-between mb-6">
+                        <div>
+                            <h3 class="text-xl font-semibold text-[#f0f6fc]">Data Resolution</h3>
+                            <p class="text-sm text-[#8b949e]">Select temporal granularity for visualization</p>
+                        </div>
+                        <div class="relative w-48">
+                            <select id="timeUnit" class="w-full bg-[#0d1117] border border-[#21262d] rounded-lg px-4 py-2.5 text-[#f0f6fc] focus:ring-2 focus:ring-[#58a6ff] focus:border-transparent appearance-none">
+                                <option value="hour">Hourly</option>
+                                <option value="minute">Minutely</option>
+                                <option value="second">Secondly</option>
+                            </select>
+                            <div class="absolute inset-y-0 right-3 flex items-center pointer-events-none">
+                                <svg class="w-5 h-5 text-[#8b949e]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="space-y-8">
+                        <!-- Existing Charts -->
+                        <div class="bg-[#0d1117] p-4 rounded-lg border border-[#21262d]">
+                            <h4 class="text-lg font-medium text-[#f0f6fc] mb-4">Traffic Flow Analysis</h4>
+                            <canvas id="trafficFlowChart"></canvas>
+                        </div>
+                        <div class="bg-[#0d1117] p-4 rounded-lg border border-[#21262d]">
+                            <h4 class="text-lg font-medium text-[#f0f6fc] mb-4">Security Event Timeline</h4>
+                            <canvas id="attackCountChart"></canvas>
+                        </div>
+                        <!-- New Real-Time Vehicle Count Chart -->
+                        <div class="bg-[#0d1117] p-4 rounded-lg border border-[#21262d]">
+                            <h4 class="text-lg font-medium text-[#f0f6fc] mb-4">Real-Time Vehicle Counts (YOLO)</h4>
+                            <canvas id="realTimeVehicleChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Inline Script for Real-Time Vehicle Count Chart -->
+        <script>
+            const realTimeCtx = document.getElementById('realTimeVehicleChart').getContext('2d');
+            const realTimeChart = new Chart(realTimeCtx, {
+                type: 'line',
+                data: {
+                    labels: [],
+                    datasets: [
+                        {
+                            label: 'Lane 1',
+                            data: [],
+                            borderColor: '#0bda5b',
+                            fill: false,
+                            tension: 0.1
+                        },
+                        {
+                            label: 'Lane 2',
+                            data: [],
+                            borderColor: '#1a73e8',
+                            fill: false,
+                            tension: 0.1
+                        }
+                    ]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: { display: true, text: 'Vehicle Count', color: '#f0f6fc' },
+                            ticks: { color: '#8b949e' }
+                        },
+                        x: {
+                            title: { display: true, text: 'Time', color: '#f0f6fc' },
+                            ticks: { color: '#8b949e' }
+                        }
+                    },
+                    plugins: {
+                        legend: { labels: { color: '#f0f6fc' } }
+                    },
+                    animation: {
+                        duration: 1000,
+                        easing: 'easeInOutQuad'
+                    }
+                }
+            });
+
+            async function updateRealTimeChart() {
+                try {
+                    const response = await fetch('/vehicle_counts');
+                    if (!response.ok) throw new Error('Failed to fetch vehicle counts');
+                    const data = await response.json();
+
+                    const lane1Data = data.lane_1 || [];
+                    const lane2Data = data.lane_2 || [];
+
+                    // Use the most recent timestamps as labels (assuming lane_1 and lane_2 have similar timestamps)
+                    const labels = lane1Data.map(entry => {
+                        const time = new Date(entry.timestamp);
+                        return time.toLocaleTimeString();
+                    });
+
+                    realTimeChart.data.labels = labels;
+                    realTimeChart.data.datasets[0].data = lane1Data.map(entry => entry.count);
+                    realTimeChart.data.datasets[1].data = lane2Data.map(entry => entry.count);
+                    realTimeChart.update();
+                } catch (error) {
+                    console.error('Error updating real-time chart:', error);
+                }
+            }
+
+            // Initial update and periodic refresh
+            updateRealTimeChart();
+            setInterval(updateRealTimeChart, 5000); // Update every 5 seconds
+        </script>
+       <script src="/static/script.js"></script>
+    </div>
+</body>
+</html>
