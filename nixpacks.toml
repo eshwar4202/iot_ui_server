@@ -1,2 +1,5 @@
 [phases.setup]
-nixPkgs = ["python312", "libGL"]
+nixPkgs = ["python312", "libGL", "ffmpeg", "libglib"]
+
+[phases.build]
+cmds = ["pip install -r requirements.txt"]
