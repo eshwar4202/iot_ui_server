@@ -1,0 +1,8 @@
+flask
+cv
+numpy
+paho-mqtt
+requests
+pytz
+roboflow
+supervision
