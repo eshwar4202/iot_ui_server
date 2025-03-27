@@ -20,7 +20,7 @@ project = rf.workspace().project("toy-cars-hqi4o")
 model = project.version(1).model
 
 # MQTT Configuration
-mqtt_broker = "192.168.25.228"
+mqtt_broker = "test.mosquitto.org"
 mqtt_topic = "esp32/vehicle_count"
 attack_topic = "esp32/attack_detection"
 
