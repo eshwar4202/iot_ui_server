@@ -1,5 +1,5 @@
 flask
-opencv-python-headless
+cv
 numpy
 paho-mqtt
 requests
