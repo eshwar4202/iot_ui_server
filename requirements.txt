@@ -6,3 +6,5 @@ requests
 pytz
 roboflow
 supervision
+gunicorn
+
