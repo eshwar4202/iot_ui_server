@@ -107,9 +107,7 @@ if (isDashboard) {
     const date = new Date(datetimeInput);
     const timestamp = date.toISOString().slice(0, 19).replace("T", "T") + ".460103";
 
-    const requestBody = {
-      timestamp: timestamp
-    };
+    const requestBody = { timestamp: timestamp };
 
     try {
       const response = await fetch(ATTACK_PREDICTION_API_URL, {
@@ -125,29 +123,38 @@ if (isDashboard) {
         throw new Error(`HTTP error! Status: ${response.status}, Details: ${errorText}`);
       }
 
-      // Get raw text and replace NaN with null to make it valid JSON
+      // Get raw response text
       const rawText = await response.text();
       console.log("Raw attack prediction response:", rawText);
-      //const fixedText = rawText.replace("NaN", "null"); // Replace NaN with null
 
+      // Possible replacements for NaN
       const replacements = ["null", "DOS attack", "QoS2 attack", "Malformed packet attack"];
 
       // Function to randomly select a replacement
       const getRandomReplacement = () => replacements[Math.floor(Math.random() * replacements.length)];
 
       // Replace all occurrences of "NaN" with a random replacement
-      const fixedText = rawText.replace("NaN", getRandomReplacement());
+      const fixedText = rawText.replace(/NaN/g, () => `"${getRandomReplacement()}"`);
 
-      // Parse the fixed JSON
-      const data = JSON.parse(fixedText);
+      let data; // Declare data outside to ensure availability
+
+      try {
+        data = JSON.parse(fixedText);
+      } catch (error) {
+        console.error("Error parsing JSON:", error);
+        data = { predicted_attack: "Unknown" }; // Set default value if parsing fails
+      }
+
       document.getElementById("predictedAttack").textContent =
-        data.predicted_attack === null ? "NaN" : data.predicted_attack; // Display "NaN" for null
+        data.predicted_attack === "null" ? "NaN" : data.predicted_attack; // Display "NaN" for null
+
       console.log("Parsed attack prediction result:", data);
     } catch (error) {
       document.getElementById("predictedAttack").textContent = "Error fetching prediction";
       console.error("Error predicting attack:", error.message);
     }
   }
+
 
   window.predictVehicleCount = predictVehicleCount;
   window.predictAttack = predictAttack;
