@@ -136,7 +136,7 @@ if (isDashboard) {
       const getRandomReplacement = () => replacements[Math.floor(Math.random() * replacements.length)];
 
       // Replace all occurrences of "NaN" with a random replacement
-      const fixedText = rawText.replace(/NaN/g, getRandomReplacement());
+      const fixedText = rawText.replace("NaN", getRandomReplacement());
 
       // Parse the fixed JSON
       const data = JSON.parse(fixedText);
