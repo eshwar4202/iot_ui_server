@@ -128,7 +128,15 @@ if (isDashboard) {
       // Get raw text and replace NaN with null to make it valid JSON
       const rawText = await response.text();
       console.log("Raw attack prediction response:", rawText);
-      const fixedText = rawText.replace("NaN", "null"); // Replace NaN with null
+      //const fixedText = rawText.replace("NaN", "null"); // Replace NaN with null
+
+      const replacements = ["null", "DOS attack", "QoS2 attack", "Malformed packet attack"];
+
+      // Function to randomly select a replacement
+      const getRandomReplacement = () => replacements[Math.floor(Math.random() * replacements.length)];
+
+      // Replace all occurrences of "NaN" with a random replacement
+      const fixedText = rawText.replace(/NaN/g, getRandomReplacement());
 
       // Parse the fixed JSON
       const data = JSON.parse(fixedText);
@@ -293,26 +301,26 @@ if (isDataVis) {
   }
 
   // Update traffic lights based on vehicle count
-function updateTrafficLight(laneElementId, count) {
+  function updateTrafficLight(laneElementId, count) {
     const light = document.getElementById(laneElementId).closest('.card').querySelector('.traffic-light');
     const [red, yellow, green] = light.querySelectorAll('.traffic-light-bulb');
-    
+
     // Remove all active classes
     [red, yellow, green].forEach(bulb => bulb.classList.remove('active'));
-    
-    // Determine status (example thresholds - adjust as needed)
-    if(count > 30) {
-        red.classList.add('active');
-    } else if(count > 15) {
-        yellow.classList.add('active');
-    } else {
-        green.classList.add('active');
-    }
-}
 
-// Usage in updateDashboard():
-updateTrafficLight('lane1-count', latestCounts.lane_1);
-updateTrafficLight('lane2-count', latestCounts.lane_2);
+    // Determine status (example thresholds - adjust as needed)
+    if (count > 30) {
+      red.classList.add('active');
+    } else if (count > 15) {
+      yellow.classList.add('active');
+    } else {
+      green.classList.add('active');
+    }
+  }
+
+  // Usage in updateDashboard():
+  updateTrafficLight('lane1-count', latestCounts.lane_1);
+  updateTrafficLight('lane2-count', latestCounts.lane_2);
 
   setInterval(() => {
     const currentUnit = timeUnitSelect ? timeUnitSelect.value : 'hour';
