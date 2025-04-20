@@ -11,6 +11,16 @@ import threading
 import queue
 from roboflow import Roboflow
 import supervision as sv
+import socket
+
+
+# s = socket.socket()
+
+# Define the port on which you want to connect
+# port = 7000
+
+# connect to the server on local computer
+# s.connect(("127.0.0.1", port))
 
 app = Flask(__name__)
 
@@ -20,7 +30,11 @@ project = rf.workspace().project("toy-cars-hqi4o")
 model = project.version(1).model
 
 # MQTT Configuration
-mqtt_broker = "test.mosquitto.org"
+# s.send(("CenYq6bDRB7p73EjsPEpiYN7uveyPUTdXkDkgUduboaN").encode())
+# brok = s.recv(1024)
+# mqtt_broker = brok
+# print(brok)
+mqtt_broker = "broker.emqx.io"
 mqtt_topic = "esp32/vehicle_count"
 attack_topic = "esp32/attack_detection"
 
